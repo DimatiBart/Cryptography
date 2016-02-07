@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="kiokiApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="src/styles/index.css">
+    <!-- <script scr="src/scripts/controllers/fenceCtrl.js"></script>
+    <script scr="src/scripts/services/fenceSvc.js"></script> -->
+    <title></title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Fence Method</h2>
+      <form  ng-controller="fenceCtrl">
+        <div ng-show="error" class="alert alert-danger row center-text">
+            <span> {{error}}</span>
+        </div>
+        <div class=" form-group">
+          <div class="part">
+            <label>Original Message: </label>
+            <input type="text" ng-model="fenceData.originalMessage" class="form-control">
+          </div>
+          <div class="part">
+            <label>Encrypted Message: </label>
+            <input type="text" ng-model="fenceData.encryptedMessage" class="form-control">
+          </div>
+          </div>
+        <div class="form-group part">
+          <label>Key: </label>
+          <input validnumber type="text" ng-model="fenceData.key" class="form-control">
+        </div>
+        <div class="buttons-container">
+          <input type="button" value="Encrypt" class="btn btn-primary" ng-click="encrypt()">
+          <button type="button" class="btn btn-primary" ng-click="decrypt()">Decrypt</button>
+        </div>
+      </form>
+    </div>
+    <hr>
+
+    <div class="container">
+      <h2>Key Phrase Method</h2>
+      <form  ng-controller="phraseCtrl">
+        <div ng-show="error" class="alert alert-danger row center-text">
+            <span> {{error}}</span>
+        </div>
+        <div class=" form-group">
+          <div class="part">
+            <label>Original Message: </label>
+            <input type="text" ng-model="Data.originalMessage" class="form-control">
+          </div>
+          <div class="part">
+            <label>Encrypted Message: </label>
+            <input type="text" ng-model="Data.encryptedMessage" class="form-control">
+          </div>
+          </div>
+        <div class="form-group part">
+          <label>Key Phrase: </label>
+          <input type="text" ng-model="Data.keyPhrase" class="form-control">
+        </div>
+        <div class="buttons-container">
+          <input type="button" value="Encrypt" class="btn btn-primary" ng-click="encrypt()">
+          <button type="button" class="btn btn-primary" ng-click="decrypt()">Decrypt</button>
+        </div>
+      </form>
+    </div>
+    <script src="src/scripts/app.js"></script>
+  </body>
+</html>
