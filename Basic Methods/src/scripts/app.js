@@ -72,12 +72,12 @@ controller('phraseCtrl', ['$scope', 'phraseSvc', function($scope, phraseSvc){
     $scope.error = "";
     $scope.encrypt = function (){
       console.log ($scope.Data.originalMessage);
-      // if ($scope.Data.originalMessage == undefined || $scope.Data.keyPhrase === undefined ||
-      // $scope.Data.originalMessage === "" || $scope.Data.keyPhrase === "") {
-      //   $scope.error = "Data is missing";
-      //   return;
-      // }
-      // else {$scope.error = "";}
+      if ($scope.Data.originalMessage == undefined || $scope.Data.keyPhrase === undefined ||
+      $scope.Data.originalMessage === "" || $scope.Data.keyPhrase === "") {
+        $scope.error = "Data is missing";
+        return;
+      }
+      else {$scope.error = "";}
       $scope.Data.encryptedMessage = phraseSvc.phrase($scope.Data.originalMessage, $scope.Data.keyPhrase, true);
     };
     $scope.decrypt = function (){
