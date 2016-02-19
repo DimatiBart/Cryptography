@@ -174,13 +174,13 @@ factory ('gridSvc', function(){
       let cryptedMessage = new Array(4);
       for (let i = 0; i < cryptedMessage.length; i++){
         cryptedMessage[i] = new Array(4);
-        cryptedMessage[i].fill('');
+        cryptedMessage[i].fill(' ');
       }
       message = message.split("");
       while (message.length !== 0 ){
         for (let times = 0; times < 4; times++){
           rotateClockwise(cryptedMessage);
-          for (let i = 0; i < gridArray.length; i++){
+          for (let i = 0; i < gridArray.length && message.length !== 0; i++){
             cryptedMessage[gridArray[i][0]][gridArray[i][1]] = message.shift();
           }
         }
@@ -189,7 +189,7 @@ factory ('gridSvc', function(){
         }
         for (let i = 0; i < cryptedMessage.length; i++){
           cryptedMessage[i] = new Array(4);
-          cryptedMessage[i].fill('');
+          cryptedMessage[i].fill(' ');
         }
       }
       return finalMessage;
@@ -203,7 +203,7 @@ factory ('gridSvc', function(){
       let currentSubSymbol = 0;
       while( currentSubSymbol < message.length){
         for (let i= 0; i < encryptedMessage.length; i++){
-          encryptedMessage[i].fill('');
+          encryptedMessage[i].fill(' ');
         }
         for (let i = 0; i < encryptedMessage.length && currentSubSymbol < message.length; i++){
           for (let j = 0; j < encryptedMessage[i].length && currentSubSymbol < message.length; j++) {
