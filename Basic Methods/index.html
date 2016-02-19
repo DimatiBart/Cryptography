@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <link rel="stylesheet" href="src/styles/index.css">
-    <!-- <script scr="src/scripts/controllers/fenceCtrl.js"></script>
-    <script scr="src/scripts/services/fenceSvc.js"></script> -->
     <title></title>
   </head>
   <body>
@@ -58,6 +56,47 @@
           <label>Key Phrase: </label>
           <input type="text" ng-model="Data.keyPhrase" class="form-control">
         </div>
+        <div class="buttons-container">
+          <input type="button" value="Encrypt" class="btn btn-primary" ng-click="encrypt()">
+          <button type="button" class="btn btn-primary" ng-click="decrypt()">Decrypt</button>
+        </div>
+      </form>
+    </div>
+    <hr>
+    <div class="container">
+      <h2>Rotating Grid Method</h2>
+      <form  ng-controller="gridCtrl">
+        <div ng-show="error" class="alert alert-danger row center-text">
+            <span> {{error}}</span>
+        </div>
+        <div class=" form-group">
+          <div class="part">
+            <label>Original Message: </label>
+            <input type="text" ng-model="Data.originalMessage" class="form-control">
+          </div>
+          <div class="part">
+            <label>Encrypted Message: </label>
+            <input type="text" ng-model="Data.encryptedMessage" class="form-control">
+          </div>
+          </div>
+          <div class="form-group part">
+            <div class="part">
+              <label>1: </label>
+              <input type="text" ng-model="Data.firstNumber" class="form-control number" maxlength="3">
+            </div>
+            <div class="part">
+              <label>2: </label>
+              <input type="text" ng-model="Data.secondNumber" class="form-control number" maxlength="3">
+            </div>
+            <div class="part">
+              <label>3: </label>
+              <input type="text" ng-model="Data.thirdNumber" class="form-control number" maxlength="3">
+            </div>
+            <div class="part">
+              <label>4: </label>
+              <input type="text" ng-model="Data.forthNumber" class="form-control number" maxlength="3">
+            </div>
+          </div>
         <div class="buttons-container">
           <input type="button" value="Encrypt" class="btn btn-primary" ng-click="encrypt()">
           <button type="button" class="btn btn-primary" ng-click="decrypt()">Decrypt</button>

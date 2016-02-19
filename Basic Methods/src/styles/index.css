@@ -10,6 +10,7 @@
 .part {
   display: inline-block;
   margin-right: 20px;
+  text-align: center;
 }
 
 .buttons-container {
@@ -25,4 +26,8 @@ hr {
 
 .center-text {
   text-align: center;
+}
+
+.number {
+  width: 47px;
 }
