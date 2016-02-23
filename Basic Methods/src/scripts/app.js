@@ -3,11 +3,14 @@ var app = angular.module('kiokiApp', []);
 
 app.
 controller('fenceCtrl', ['$scope', 'fenceSvc', function($scope, fenceSvc){
-    $scope.fenceData = {};
+    $scope.fenceData = {
+      originalMessage: "",
+      encryptedMessage: "",
+      key: ""
+    };
     $scope.error = "";
     $scope.encrypt = function (){
-      if ($scope.fenceData.originalMessage === undefined || $scope.fenceData.key === undefined ||
-      $scope.fenceData.originalMessage === "" || $scope.fenceData.key === "") {
+      if ( $scope.fenceData.originalMessage === "" || $scope.fenceData.key === "") {
         $scope.error = "Data is missing";
         return;
       }
@@ -15,8 +18,7 @@ controller('fenceCtrl', ['$scope', 'fenceSvc', function($scope, fenceSvc){
       $scope.fenceData.encryptedMessage = fenceSvc.fence($scope.fenceData.originalMessage, $scope.fenceData.key, true);
     };
     $scope.decrypt = function (){
-      if ($scope.fenceData.encryptedMessage === undefined || $scope.fenceData.key === undefined ||
-        $scope.fenceData.encryptedMessage === "" || $scope.fenceData.key === "") {
+      if ( $scope.fenceData.encryptedMessage === "" || $scope.fenceData.key === "") {
         $scope.error = "Data is missing";
         return;
       }
@@ -68,10 +70,14 @@ directive('validnumber', function(){
   }
 }).
 controller('phraseCtrl', ['$scope', 'phraseSvc', function($scope, phraseSvc){
-    $scope.Data = {};
+  $scope.Data = {
+    originalMessage: "",
+    encryptedMessage: "",
+    keyPhrase: ""
+  };
     $scope.error = "";
     $scope.encrypt = function (){
-      if ($scope.Data.originalMessage == undefined || $scope.Data.keyPhrase === undefined ||
+      if (
       $scope.Data.originalMessage === "" || $scope.Data.keyPhrase === "") {
         $scope.error = "Data is missing";
         return;
@@ -80,8 +86,7 @@ controller('phraseCtrl', ['$scope', 'phraseSvc', function($scope, phraseSvc){
       $scope.Data.encryptedMessage = phraseSvc.phrase($scope.Data.originalMessage, $scope.Data.keyPhrase, true);
     };
     $scope.decrypt = function (){
-      if ($scope.Data.encryptedMessage == undefined || $scope.Data.keyPhrase === undefined ||
-        $scope.Data.encryptedMessage === "" || $scope.Data.keyPhrase === "") {
+      if ( $scope.Data.encryptedMessage === "" || $scope.Data.keyPhrase === "") {
         $scope.error = "Data is missing";
         return;
       }
@@ -241,14 +246,20 @@ factory ('gridSvc', function(){
   }
 }).
 controller('gridCtrl', ['$scope', 'gridSvc', function($scope, gridSvc){
-  $scope.Data = {};
+  $scope.Data = {
+    originalMessage: "",
+    encryptedMessage: "",
+    firstNumber: "",
+    secondNumber: "",
+    thirdNumber: "",
+    forth: ""
+  };
   $scope.error = "";
   $scope.encrypt = function(){
-    if ($scope.Data.originalMessage == undefined ||
-    $scope.Data.originalMessage === "" || $scope.Data.firstNumber === "" || $scope.Data.firstNumber === undefined
-    || $scope.Data.secondNumber === "" || $scope.Data.secondNumber === undefined
-    ||$scope.Data.thirdNumber === "" || $scope.Data.thirdNumber === undefined
-    ||$scope.Data.forthNumber === "" || $scope.Data.forthNumber === undefined ) {
+    if ($scope.Data.originalMessage === "" || $scope.Data.firstNumber === ""
+    || $scope.Data.secondNumber === ""
+    ||$scope.Data.thirdNumber === ""
+    ||$scope.Data.forthNumber === "" ) {
       $scope.error = "Data is missing";
       return;
     }
@@ -266,11 +277,10 @@ controller('gridCtrl', ['$scope', 'gridSvc', function($scope, gridSvc){
     $scope.Data.encryptedMessage = gridSvc.encrypt($scope.Data.originalMessage, indexArray);
   };
   $scope.decrypt = function (){
-    if ($scope.Data.encryptedMessage == undefined ||
-    $scope.Data.encryptedMessage === "" || $scope.Data.firstNumber === "" || $scope.Data.firstNumber === undefined
-    || $scope.Data.secondNumber === "" || $scope.Data.secondNumber === undefined
-    ||$scope.Data.thirdNumber === "" || $scope.Data.thirdNumber === undefined
-    ||$scope.Data.forthNumber === "" || $scope.Data.forthNumber === undefined ) {
+    if ( $scope.Data.encryptedMessage === "" || $scope.Data.firstNumber === ""
+    || $scope.Data.secondNumber === ""
+    ||$scope.Data.thirdNumber === ""
+    ||$scope.Data.forthNumber === "" ) {
       $scope.error = "Data is missing";
       return;
     }
@@ -326,7 +336,11 @@ directive('validrusinput', function(){
   }
 }).
 controller('caesarCtrl', ['$scope', 'caesarSvc', function($scope, caesarSvc){
-  $scope.Data = {};
+  $scope.Data = {
+    originalMessage: "",
+    encryptedMessage: "",
+    key: ""
+  };
   $scope.error = "";
   $scope.encrypt = function (){
     $scope.Data.encryptedMessage = caesarSvc.encrypt($scope.Data.originalMessage, $scope.Data.key);
