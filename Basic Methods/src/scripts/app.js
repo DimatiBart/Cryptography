@@ -287,4 +287,89 @@ controller('gridCtrl', ['$scope', 'gridSvc', function($scope, gridSvc){
     else {$scope.error = "";}
     $scope.Data.originalMessage = gridSvc.decrypt($scope.Data.encryptedMessage, indexArray);
   }
+}]).
+factory('caesarSvc', function(){
+  return {
+    encrypt: function(message, key){
+      let encryptedMessage = "";
+      for (let i in message){
+        let code = message.charCodeAt(i);
+        if (code>=1040 && code < 1072){
+          encryptedMessage += String.fromCharCode((((code-1040)+ +key)%32)+1040);
+        }
+        else {encryptedMessage += String.fromCharCode((((code-1072)+ +key)%32)+1072);}
+      }
+      return encryptedMessage;
+    },
+    decrypt: function (encryptedMessage, key){
+      let message = "";
+      key = +key;
+      for (let i in encryptedMessage){
+        let code = encryptedMessage.charCodeAt(i);
+        if (code>=1040 && code < 1072){
+          message += String.fromCharCode((((code-1040)+32-key)%32)+1040);
+        }
+        else {message += String.fromCharCode((((code-1072)+32-key)%32)+1072);}
+      }
+      return message;
+    }
+  }
+}).
+directive('validrusinput', function(){
+  return {
+    restrict: 'A',
+    link: function ($scope, element, attr){
+      element.bind('input', function(event){
+        this.value = this.value.replace(/[^А-я]/, '');
+      });
+    }
+  }
+}).
+controller('caesarCtrl', ['$scope', 'caesarSvc', function($scope, caesarSvc){
+  $scope.Data = {};
+  $scope.error = "";
+  $scope.encrypt = function (){
+    $scope.Data.encryptedMessage = caesarSvc.encrypt($scope.Data.originalMessage, $scope.Data.key);
+  };
+  $scope.decrypt = function(){
+    $scope.Data.originalMessage = caesarSvc.decrypt($scope.Data.encryptedMessage, $scope.Data.key);
+  }
+}]).
+factory('caesar1Svc', function(){
+  return {
+    encrypt: function(message, key){
+      let encryptedMessage = "";
+      key = +key;
+      for (let i in message){
+        let code = message.charCodeAt(i);
+        if (code>=1040 && code < 1072){
+          encryptedMessage += String.fromCharCode((((code-1040)*key)%32)+1040);
+        }
+        else {encryptedMessage += String.fromCharCode((((code-1072)*key)%32)+1072);}
+      }
+      return encryptedMessage;
+    },
+    decrypt: function (encryptedMessage, key){
+      let message = "";
+      key = +key;
+      for (let i in encryptedMessage){
+        let code = encryptedMessage.charCodeAt(i);
+        if (code>=1040 && code < 1072){
+          message += String.fromCharCode((((code-1040)/key)%32)+1040);
+        }
+        else {message += String.fromCharCode((((code-1072)/(32-key))%32)+1072);}
+      }
+      return message;
+    }
+  }
+}).
+controller('caesar1Ctrl', ['$scope', 'caesar1Svc', function($scope, caesar1Svc){
+  $scope.Data = {};
+  $scope.error = "";
+  $scope.encrypt = function (){
+    $scope.Data.encryptedMessage = caesar1Svc.encrypt($scope.Data.originalMessage, $scope.Data.key);
+  };
+  $scope.decrypt = function(){
+    $scope.Data.originalMessage = caesar1Svc.decrypt($scope.Data.encryptedMessage, $scope.Data.key);
+  }
 }])
