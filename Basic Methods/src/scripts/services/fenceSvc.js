@@ -1,8 +1,9 @@
-angular.module('kiokiApp').factory('fenceSvc', function(){
+'use strict';
+angular.module('kiokiApp')
+.factory('fenceSvc', function(){
     return {
-      fence: function(message, key){
-        'use strict';
-        let encryptedMessage = [];
+      fence: function(message, key, mode){
+        let cryptedMessage = [];
         let current = 0;
         let step = true;
         for (let i = 0; i < key; i++){
@@ -15,7 +16,8 @@ angular.module('kiokiApp').factory('fenceSvc', function(){
             secondStep = firstStep;
           }
           for (let j = i; j < message.length;){
-            encryptedMessage[current++] = message[j];
+            if (mode){cryptedMessage[current++] = message[j];}
+            else {cryptedMessage[j] = message[current++];};
             if (step){
               j += firstStep;
               step = false;
@@ -26,7 +28,7 @@ angular.module('kiokiApp').factory('fenceSvc', function(){
             }
           }
         }
-        return encryptedMessage.join("");
+        return cryptedMessage.join("");
       }
     };
 })
