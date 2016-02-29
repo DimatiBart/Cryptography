@@ -1,6 +1,7 @@
 # Cryptography
 Some cryptography methods on JS with a little help from:
  - Angular
+ - Webpack
  - Bootstrap
 
 
